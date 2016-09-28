@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "647257890120",
+    "firebase_url": "https://holidays-abf65.firebaseio.com",
+    "project_id": "holidays-abf65",
+    "storage_bucket": "holidays-abf65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647257890120:android:78081944054b43fd",
+        "android_client_info": {
+          "package_name": "ru.solandme.holidays"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "647257890120-kngjfng7p8jha5in4n4t6j481g7d9p3i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.solandme.holidays",
+            "certificate_hash": "0CA9D720C58E907E378504463729F970A8F596D8"
+          }
+        },
+        {
+          "client_id": "647257890120-pisqvgnp5b3ldheb9q8tl0fr7d7kbt7q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNYd12wXBimLCsA_xvmX2xeYP6E0jiCNw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "647257890120-pisqvgnp5b3ldheb9q8tl0fr7d7kbt7q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
