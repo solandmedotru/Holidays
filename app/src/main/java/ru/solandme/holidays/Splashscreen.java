@@ -14,7 +14,7 @@ import ru.solandme.holidays.adapters.CustomSpinnerAdapter;
 
 public class Splashscreen extends AppCompatActivity {
 
-    private int[] flags = {R.mipmap.ic_russia, R.mipmap.ic_usa};
+    private int[] flags = {R.mipmap.ic_russia, R.mipmap.ic_ukraine, R.mipmap.ic_usa};
 
     private Context context;
 

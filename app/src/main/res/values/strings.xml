@@ -4,6 +4,7 @@
 
     <string-array name="countries">
         <item>Russia</item>
-        <item>US</item>
+        <item>Ukraine</item>
+        <item>USA</item>
     </string-array>
 </resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Праздники</string>
+    <string name="choose_country">Выберите страну ...</string>
+
+    <string-array name="countries">
+        <item>Россия</item>
+        <item>Украина</item>
+        <item>США</item>
+    </string-array>
+</resources>
