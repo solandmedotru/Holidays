@@ -17,6 +17,8 @@
             android:layout_height="match_parent"
             app:contentScrim="@color/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp"
             app:titleEnabled="false">
 
             <include layout="@layout/toolbar" />
