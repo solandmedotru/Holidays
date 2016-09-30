@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context="ru.solandme.holidays.MainActivity">
 
+    <include layout="@layout/toolbar" />
+
     <android.support.design.widget.TabLayout
         android:id="@+id/main_sliding_tabs"
         android:layout_width="match_parent"
