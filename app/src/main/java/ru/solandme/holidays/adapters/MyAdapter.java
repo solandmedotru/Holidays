@@ -1,7 +1,6 @@
 package ru.solandme.holidays.adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import ru.solandme.holidays.DetailActivity;
 import ru.solandme.holidays.R;
-import ru.solandme.holidays.Splashscreen;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     String[] dataSet;
@@ -32,13 +30,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     public MyAdapter(int page) {
-        if (page == 0){
+        if (page == 0) {
             dataSet = new String[]{"asdasdasdas", "sdfds", "sdfsdfdsfsdf"};
         }
-        if (page == 1){
+        if (page == 1) {
             dataSet = new String[]{"asdadsaxczassdsdasdas", "sdfsadasdds", "sdfasdadssdfdsfsdf"};
         }
-        if (page == 2){
+        if (page == 2) {
             dataSet = new String[]{"asda545sdasdas", "sd46456fds", "sdfsd456456fdsfsdf"};
         }
     }
