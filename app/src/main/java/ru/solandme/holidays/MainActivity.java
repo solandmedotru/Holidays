@@ -22,11 +22,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_main);
+        sharedPreferences = getApplicationContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.mainToolbar);
         setSupportActionBar(toolbar);
-
-        sharedPreferences = getApplicationContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.main_view_pager);
         viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), MainActivity.this));
@@ -39,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        MenuItem menuItem = menu.findItem(R.id.action_show_splash);
-        menuItem.setChecked(sharedPreferences.getBoolean("isDontShowSplash", false));
+        menu.findItem(R.id.action_show_splash)
+                .setChecked(sharedPreferences.getBoolean("isDontShowSplash", false));
         return true;
     }
 

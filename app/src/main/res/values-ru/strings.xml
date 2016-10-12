@@ -8,7 +8,7 @@
         <item>Украина</item>
         <item>США</item>
     </string-array>
-    <string name="don_t_show">Не показывать</string>
+    <string name="don_t_show">Не показывать заставку</string>
     <string name="tab1_name">Праздники</string>
     <string name="tab2_name">Дни рождения</string>
     <string name="tab3_name">События</string>
