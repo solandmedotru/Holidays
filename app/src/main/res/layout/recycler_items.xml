@@ -33,12 +33,11 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <TextView
-                android:id="@+id/card_text"
+                android:id="@+id/holidayDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/card_image"
                 android:layout_margin="@dimen/md_keylines"
-                android:text="ghh jghj ghj ghj g jgjgh jghj gjghjgjghj g jghj ghj gj gjg"
                 android:ellipsize="end"
                 android:maxLines="2" />
 
@@ -46,7 +45,7 @@
                 android:id="@+id/action_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/card_text"
+                android:layout_below="@+id/holidayDescription"
                 style="?android:attr/borderlessButtonStyle"
                 android:textColor="?attr/colorAccent"
                 android:text="Action" />

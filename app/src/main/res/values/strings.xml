@@ -2,15 +2,6 @@
     <string name="app_name">Holidays</string>
     <string name="choose_country">Choose Country ...</string>
 
-    <string-array name="countries">
-        <item>Russia</item>
-        <item>Ukraine</item>
-        <item>USA</item>
-    </string-array>
-
-    <string name="tab1_name">Holidays</string>
-    <string name="tab2_name">Birthdays</string>
-    <string name="tab3_name">Events</string>
     <string name="theme_dark">Theme Dark</string>
     <string name="theme_light">Theme Light</string>
     <string name="don_t_show">Don`t show splashscreen</string>

@@ -10,16 +10,11 @@ import ru.solandme.holidays.R;
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private Context context;
     private String[] tabTitles;
 
     public MyFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
-        this.context = context;
-        tabTitles = new String[]{
-                context.getString(R.string.tab1_name),
-                context.getString(R.string.tab2_name),
-                context.getString(R.string.tab3_name)};
+        tabTitles = context.getResources().getStringArray(R.array.holiday_tabs_name);
     }
 
     @Override

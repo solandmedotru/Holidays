@@ -9,36 +9,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import ru.solandme.holidays.DetailActivity;
+import ru.solandme.holidays.Holiday;
 import ru.solandme.holidays.R;
+import ru.solandme.holidays.data.ApiRepository;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    String[] dataSet;
+
+    ArrayList<Holiday> holidays;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
         TextView holidayName;
+        TextView holidayDescription;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
 
             cardView = (CardView) itemView.findViewById(R.id.card_view);
             holidayName = (TextView) itemView.findViewById(R.id.holiday_name);
-
+            holidayDescription = (TextView) itemView.findViewById(R.id.holidayDescription);
         }
     }
 
     public MyAdapter(int page) {
-        if (page == 0) {
-            dataSet = new String[]{"asdasdasdas", "sdfds", "sdfsdfdsfsdf"};
-        }
-        if (page == 1) {
-            dataSet = new String[]{"asdadsaxczassdsdasdas", "sdfsadasdds", "sdfasdadssdfdsfsdf"};
-        }
-        if (page == 2) {
-            dataSet = new String[]{"asda545sdasdas", "sd46456fds", "sdfsd456456fdsfsdf"};
-        }
+        holidays = ApiRepository.getHolidaysByPage(page);
     }
 
     @Override
@@ -52,27 +50,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(final MyAdapter.MyViewHolder holder, final int position) {
 
-        holder.holidayName.setText(dataSet[position]);
+        holder.holidayName.setText(holidays.get(position).getName());
+        holder.holidayDescription.setText(holidays.get(position).getDescription());
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Activity activity = (Activity) view.getContext();
-                Intent intent = new Intent(activity, DetailActivity.class);
-                intent.putExtra("position", holder.getAdapterPosition());
+        holder.cardView.setOnClickListener(view -> {
+            Activity activity = (Activity) view.getContext();
+            Intent intent = new Intent(activity, DetailActivity.class);
+            intent.putExtra("position", holder.getAdapterPosition());
 
-                activity.startActivity(intent);
-                activity.overridePendingTransition(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
-            }
+            activity.startActivity(intent);
+            activity.overridePendingTransition(android.R.anim.fade_in,
+                    android.R.anim.fade_out);
         });
 
     }
 
     @Override
     public int getItemCount() {
-        return dataSet.length;
+        return holidays.size();
     }
-
 
 }

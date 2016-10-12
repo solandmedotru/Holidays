@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "647257890120-asirmi5q486k35j45oncocu7mqdnkvsk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.solandme.holidays",
+            "certificate_hash": "DFFE3DFD15FB62B4749E1EA9889F6E0B7B12285E"
+          }
+        },
+        {
           "client_id": "647257890120-kngjfng7p8jha5in4n4t6j481g7d9p3i.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

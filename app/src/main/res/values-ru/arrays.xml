@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="holiday_tabs_name">
+        <item>Праздники</item>
+        <item>Дни рождения</item>
+        <item>События</item>
+        <item>Именины</item>
+        <item>Религиозные</item>
+    </string-array>
+
+    <string-array name="countries">
+        <item>Россия</item>
+        <item>Украина</item>
+        <item>США</item>
+    </string-array>
+</resources>
