@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="16dp"
         android:background="@drawable/button_bg"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textColor="@android:color/white" />
 
     <Spinner
@@ -48,5 +48,15 @@
         android:textColor="@android:color/white"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:text="@string/don_t_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chkBoxDoNotShow"
+        android:layout_margin="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

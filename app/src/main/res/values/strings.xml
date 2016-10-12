@@ -8,11 +8,11 @@
         <item>USA</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tab1_name">Holidays</string>
     <string name="tab2_name">Birthdays</string>
     <string name="tab3_name">Events</string>
     <string name="theme_dark">Theme Dark</string>
     <string name="theme_light">Theme Light</string>
+    <string name="don_t_show">Don`t show</string>
+    <string name="submit">Submit</string>
 </resources>

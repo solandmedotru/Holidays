@@ -9,7 +9,7 @@
     <style name="AppTheme.Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
     </style>
 
-    <style name="AppTheme.Splash" parent="AppTheme">
+    <style name="AppTheme.Splash" parent="AppThemeDark">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

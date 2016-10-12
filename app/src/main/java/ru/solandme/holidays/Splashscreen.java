@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 
 import ru.solandme.holidays.adapters.CustomSpinnerAdapter;
@@ -19,29 +20,44 @@ public class Splashscreen extends AppCompatActivity {
     private Context context;
 
     private int currentCountrySelected;
+    private boolean isDontShowSplash;
 
     private SharedPreferences sharedPreferences;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
-
         context = getApplicationContext();
+
+        sharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE);
+        currentCountrySelected = sharedPreferences.getInt("country", 0);
+        isDontShowSplash = sharedPreferences.getBoolean("isDontShowSplash", false);
+
+        if(isDontShowSplash){
+            startMainActivity();
+        }
 
         initViews();
     }
 
     private void initViews() {
-        sharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE);
-        currentCountrySelected = sharedPreferences.getInt("country", 0);
 
+//---------------CheckBox init----------------
+        final CheckBox chkBoxDoNotShow = (CheckBox) findViewById(R.id.chkBoxDoNotShow);
+        chkBoxDoNotShow.setChecked(isDontShowSplash);
+        chkBoxDoNotShow.setOnClickListener(view -> {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isDontShowSplash", chkBoxDoNotShow.isChecked()).apply();
+        });
+
+// -------------Spinner init----------------
         Spinner countriesSpinner = (Spinner) findViewById(R.id.countrySpinner);
         CustomSpinnerAdapter spinnerAdapter = new CustomSpinnerAdapter(context, flags, getResources().getStringArray(R.array.countries));
         countriesSpinner.setAdapter(spinnerAdapter);
         countriesSpinner.setSelection(currentCountrySelected);
-
         countriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -53,16 +69,18 @@ public class Splashscreen extends AppCompatActivity {
             }
         });
 
+//---------------Submit Button init----------------
         Button submitBtn = (Button) findViewById(R.id.submitBtn);
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putInt("country", currentCountrySelected).apply();
+        submitBtn.setOnClickListener(view -> {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("country", currentCountrySelected).apply();
 
-                startActivity(new Intent(Splashscreen.this, MainActivity.class));
-                finish();
-            }
+            startMainActivity();
         });
+    }
+
+    private void startMainActivity() {
+        startActivity(new Intent(Splashscreen.this, MainActivity.class));
+        finish();
     }
 }

@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_show_splash);
+        menuItem.setChecked(sharedPreferences.getBoolean("isDontShowSplash", false));
         return true;
     }
 
@@ -50,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_theme_dark:
                 Utils.changeToTheme(Utils.THEME_MATERIAL_DARK, this);
+                return true;
+            case R.id.action_show_splash:
+                if(item.isChecked()) {
+                    item.setChecked(false);
+                } else {
+                    item.setChecked(true);
+                }
+                sharedPreferences.edit().putBoolean("isDontShowSplash", item.isChecked()).apply();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
