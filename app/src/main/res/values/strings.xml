@@ -6,4 +6,7 @@
     <string name="theme_light">Theme Light</string>
     <string name="don_t_show">Don`t show splashscreen</string>
     <string name="submit">Submit</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

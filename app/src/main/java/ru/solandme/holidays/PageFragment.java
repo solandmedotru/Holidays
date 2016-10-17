@@ -17,6 +17,8 @@ public class PageFragment extends Fragment {
 
     int page;
 
+    MyAdapter adapter;
+
     public PageFragment() {
         // Required empty public constructor
     }
@@ -42,7 +44,7 @@ public class PageFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_page, container, false);
         RecyclerView holidayRV = (RecyclerView) rootView.findViewById(R.id.holidayRecyclerView);
 
-        MyAdapter adapter = new MyAdapter(page);
+        adapter = new MyAdapter(page);
         holidayRV.setAdapter(adapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -50,5 +52,4 @@ public class PageFragment extends Fragment {
 
         return rootView;
     }
-
 }

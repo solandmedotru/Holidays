@@ -3,6 +3,8 @@ package ru.solandme.holidays;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,13 +29,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.mainToolbar);
         setSupportActionBar(toolbar);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.main_view_pager);
-        viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), MainActivity.this));
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.containerA, new HolidaysFragment()).commit();
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.main_sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        if (findViewById(R.id.containerB) != null){
+            if (savedInstanceState != null){
+                return;
+            }
 
+            HolidayDetailFragment holidayDetailFragment = new HolidayDetailFragment();
+            holidayDetailFragment.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.containerB, holidayDetailFragment)
+                    .commit();
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -53,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 Utils.changeToTheme(Utils.THEME_MATERIAL_DARK, this);
                 return true;
             case R.id.action_show_splash:
-                if(item.isChecked()) {
+                if (item.isChecked()) {
                     item.setChecked(false);
                 } else {
                     item.setChecked(true);
@@ -62,6 +73,17 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            getFragmentManager().popBackStack();
         }
     }
 }

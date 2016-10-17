@@ -1,7 +1,6 @@
 package ru.solandme.holidays.adapters;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,8 +10,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import ru.solandme.holidays.DetailActivity;
 import ru.solandme.holidays.Holiday;
+import ru.solandme.holidays.HolidayDetailFragment;
 import ru.solandme.holidays.R;
 import ru.solandme.holidays.data.ApiRepository;
 
@@ -54,13 +53,31 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.holidayDescription.setText(holidays.get(position).getDescription());
 
         holder.cardView.setOnClickListener(view -> {
-            Activity activity = (Activity) view.getContext();
-            Intent intent = new Intent(activity, DetailActivity.class);
-            intent.putExtra("position", holder.getAdapterPosition());
 
-            activity.startActivity(intent);
-            activity.overridePendingTransition(android.R.anim.fade_in,
-                    android.R.anim.fade_out);
+            AppCompatActivity activity = (AppCompatActivity) view.getContext();
+            HolidayDetailFragment holidayDetailFragment = new HolidayDetailFragment();
+            if (activity.findViewById(R.id.containerB) != null){
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.containerB, holidayDetailFragment)
+                        .addToBackStack(null)
+                        .commit();
+            } else {
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.containerA, holidayDetailFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+
+//            Activity activity = (Activity) view.getContext();
+//            Intent intent = new Intent(activity, DetailActivity.class);
+//            intent.putExtra("position", holder.getAdapterPosition());
+//
+//            activity.startActivity(intent);
+//            activity.overridePendingTransition(android.R.anim.fade_in,
+//                    android.R.anim.fade_out);
         });
 
     }
