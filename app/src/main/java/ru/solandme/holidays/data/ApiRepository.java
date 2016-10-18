@@ -1,11 +1,7 @@
 package ru.solandme.holidays.data;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-
-import ru.solandme.holidays.Holiday;
 
 public class ApiRepository {
 

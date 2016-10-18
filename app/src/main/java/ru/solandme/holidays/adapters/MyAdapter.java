@@ -1,5 +1,7 @@
 package ru.solandme.holidays.adapters;
 
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import ru.solandme.holidays.Holiday;
+import ru.solandme.holidays.data.Holiday;
 import ru.solandme.holidays.HolidayDetailFragment;
 import ru.solandme.holidays.R;
 import ru.solandme.holidays.data.ApiRepository;
@@ -18,6 +20,7 @@ import ru.solandme.holidays.data.ApiRepository;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     ArrayList<Holiday> holidays;
+    int currentTab;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -36,6 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public MyAdapter(int page) {
         holidays = ApiRepository.getHolidaysByPage(page);
+        currentTab = page;
     }
 
     @Override
@@ -56,28 +60,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
             HolidayDetailFragment holidayDetailFragment = new HolidayDetailFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("holidayName", holidays.get(position).getName());
+            bundle.putInt("currentTab", currentTab);
+            holidayDetailFragment.setArguments(bundle);
             if (activity.findViewById(R.id.containerB) != null){
                 activity.getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.containerB, holidayDetailFragment)
+                        .replace(R.id.containerB, holidayDetailFragment, "detailsHoliday")
                         .addToBackStack(null)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit();
             } else {
                 activity.getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.containerA, holidayDetailFragment)
+                        .replace(R.id.containerA, holidayDetailFragment, "detailsHoliday")
                         .addToBackStack(null)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit();
             }
-
-
-//            Activity activity = (Activity) view.getContext();
-//            Intent intent = new Intent(activity, DetailActivity.class);
-//            intent.putExtra("position", holder.getAdapterPosition());
-//
-//            activity.startActivity(intent);
-//            activity.overridePendingTransition(android.R.anim.fade_in,
-//                    android.R.anim.fade_out);
         });
 
     }

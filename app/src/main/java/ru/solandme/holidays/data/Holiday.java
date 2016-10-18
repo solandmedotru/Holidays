@@ -1,4 +1,4 @@
-package ru.solandme.holidays;
+package ru.solandme.holidays.data;
 
 public class Holiday {
 

@@ -16,15 +16,26 @@ import ru.solandme.holidays.adapters.MyFragmentPagerAdapter;
 public class HolidaysFragment extends Fragment {
     FragmentPagerAdapter fragmentPagerAdapter;
     ViewPager viewPager;
+    int currentTab;
 
     public HolidaysFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        fragmentPagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), getActivity());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        if (savedInstanceState != null) {
+            currentTab = savedInstanceState.getInt("currentTab");
+        }
+
         return inflater.inflate(R.layout.fragment_holidays, container, false);
     }
 
@@ -33,12 +44,25 @@ public class HolidaysFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewPager = (ViewPager) view.findViewById(R.id.main_view_pager);
-        fragmentPagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), getContext());
         viewPager.setAdapter(fragmentPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.main_sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        getActivity().getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if (getActivity().getSupportFragmentManager().getBackStackEntryCount() != 0){
+                    currentTab = getActivity().getSupportFragmentManager().findFragmentByTag("detailsHoliday").getArguments().getInt("currentTab");
+                }
+                viewPager.setCurrentItem(currentTab);
+            }
+        });
     }
 
-
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("currentTab", currentTab);
+    }
 }

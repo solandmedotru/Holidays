@@ -2,17 +2,13 @@ package ru.solandme.holidays;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import ru.solandme.holidays.adapters.MyFragmentPagerAdapter;
 import ru.solandme.holidays.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,21 +25,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.mainToolbar);
         setSupportActionBar(toolbar);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.containerA, new HolidaysFragment()).commit();
-
-        if (findViewById(R.id.containerB) != null){
-            if (savedInstanceState != null){
+        if (findViewById(R.id.containerA) != null) {
+            if (savedInstanceState != null) {
                 return;
             }
-
-            HolidayDetailFragment holidayDetailFragment = new HolidayDetailFragment();
-            holidayDetailFragment.setArguments(getIntent().getExtras());
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.containerB, holidayDetailFragment)
+            // Let's first dynamically add a fragment into a frame container
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.containerA, new HolidaysFragment(), "holidays")
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                     .commit();
         }
     }
+
+
 
 
     @Override
