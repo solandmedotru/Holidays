@@ -4,7 +4,7 @@
 
     <string name="theme_dark">Theme Dark</string>
     <string name="theme_light">Theme Light</string>
-    <string name="don_t_show">Don`t show splashscreen</string>
+    <string name="is_need_show_splash">Need show splashscreen</string>
     <string name="submit">Submit</string>
 
     <!-- TODO: Remove or change this placeholder text -->

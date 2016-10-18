@@ -1,11 +1,25 @@
 package ru.solandme.holidays.data;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import ru.solandme.holidays.R;
+
 public class ApiRepository {
 
+    private SharedPreferences sharedPreferences;
+
+    public ApiRepository(Context context) {
+        sharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE);
+    }
+
+
     static private String[] typeCodes = {"National", "Birthday", "Events", "Name day", "Religious"};
+
+    private int[] flags = {R.mipmap.ic_russia, R.mipmap.ic_ukraine, R.mipmap.ic_usa};
 
     static private ArrayList<Holiday> generateSampleHolidays() {
 
@@ -36,5 +50,25 @@ public class ApiRepository {
                 holidaysList.add(holiday);
         }
         return holidaysList;
+    }
+
+    public boolean getSettingSplashChkBox() {
+        return sharedPreferences.getBoolean("isNeedShowSplash", true);
+    }
+
+    public void setSettingSplashChkBow(boolean settingSplashChkBow) {
+        sharedPreferences.edit().putBoolean("isNeedShowSplash", settingSplashChkBow).apply();
+    }
+
+    public int[] getFlagList() {
+        return flags;
+    }
+
+    public int getCurrentCountrySelected() {
+        return sharedPreferences.getInt("country", 0);
+    }
+
+    public void setSettingCurrentCountry(int settingCurrentCountry) {
+        sharedPreferences.edit().putInt("country", settingCurrentCountry).apply();
     }
 }

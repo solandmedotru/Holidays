@@ -10,7 +10,7 @@
             android:id="@+id/action_theme_dark"
             app:showAsAction="never"/>
     </group>
-    <item android:title="@string/don_t_show"
+    <item android:title="@string/is_need_show_splash"
         android:id="@+id/action_show_splash"
         app:showAsAction="never"
         android:checkable="true" />

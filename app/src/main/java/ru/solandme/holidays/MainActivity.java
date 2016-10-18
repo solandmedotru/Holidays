@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         menu.findItem(R.id.action_show_splash)
-                .setChecked(sharedPreferences.getBoolean("isDontShowSplash", false));
+                .setChecked(sharedPreferences.getBoolean("isNeedShowSplash", true));
         return true;
     }
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     item.setChecked(true);
                 }
-                sharedPreferences.edit().putBoolean("isDontShowSplash", item.isChecked()).apply();
+                sharedPreferences.edit().putBoolean("isNeedShowSplash", item.isChecked()).apply();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

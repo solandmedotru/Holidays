@@ -50,7 +50,7 @@
         android:layout_centerHorizontal="true" />
 
     <CheckBox
-        android:text="@string/don_t_show"
+        android:text="@string/is_need_show_splash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/chkBoxDoNotShow"

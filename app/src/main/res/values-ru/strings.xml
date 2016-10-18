@@ -2,9 +2,8 @@
 <resources>
     <string name="app_name">Праздники</string>
     <string name="choose_country">Выберите страну ...</string>
-
-    <string name="don_t_show">Не показывать заставку</string>
     <string name="theme_dark">Темная тема</string>
     <string name="theme_light">Светлая тема</string>
     <string name="submit">Подтвердить</string>
+    <string name="is_need_show_splash">Показывать заставку</string>
 </resources>

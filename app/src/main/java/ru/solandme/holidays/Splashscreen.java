@@ -1,8 +1,6 @@
 package ru.solandme.holidays;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,28 +13,18 @@ import ru.solandme.holidays.adapters.CustomSpinnerAdapter;
 
 public class Splashscreen extends AppCompatActivity {
 
-    private int[] flags = {R.mipmap.ic_russia, R.mipmap.ic_ukraine, R.mipmap.ic_usa};
-
-    private Context context;
-
+    SplashPresenter splashPresenter;
     private int currentCountrySelected;
-    private boolean isDontShowSplash;
-
-    private SharedPreferences sharedPreferences;
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
-        context = getApplicationContext();
 
-        sharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE);
-        currentCountrySelected = sharedPreferences.getInt("country", 0);
-        isDontShowSplash = sharedPreferences.getBoolean("isDontShowSplash", false);
+        splashPresenter = new SplashPresenter(this);
 
-        if(isDontShowSplash){
+        if(!splashPresenter.isNeedShowSplash()){
             startMainActivity();
         }
 
@@ -46,22 +34,22 @@ public class Splashscreen extends AppCompatActivity {
     private void initViews() {
 
 //---------------CheckBox init----------------
-        final CheckBox chkBoxDoNotShow = (CheckBox) findViewById(R.id.chkBoxDoNotShow);
-        chkBoxDoNotShow.setChecked(isDontShowSplash);
-        chkBoxDoNotShow.setOnClickListener(view -> {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("isDontShowSplash", chkBoxDoNotShow.isChecked()).apply();
+        CheckBox chkBoxNeedShowSplash = (CheckBox) findViewById(R.id.chkBoxDoNotShow);
+        chkBoxNeedShowSplash.setChecked(splashPresenter.isNeedShowSplash());
+        chkBoxNeedShowSplash.setOnClickListener(view -> {
+            splashPresenter.chkBoxChanged(chkBoxNeedShowSplash.isChecked());
         });
 
 // -------------Spinner init----------------
         Spinner countriesSpinner = (Spinner) findViewById(R.id.countrySpinner);
-        CustomSpinnerAdapter spinnerAdapter = new CustomSpinnerAdapter(context, flags, getResources().getStringArray(R.array.countries));
+        CustomSpinnerAdapter spinnerAdapter = new CustomSpinnerAdapter(getApplicationContext(), splashPresenter.getFlagsList(), getResources().getStringArray(R.array.countries));
         countriesSpinner.setAdapter(spinnerAdapter);
-        countriesSpinner.setSelection(currentCountrySelected);
+        countriesSpinner.setSelection(splashPresenter.getCurrentCountrySelected());
         countriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 currentCountrySelected = position;
+                splashPresenter.currentCountryChanged(position);
             }
 
             @Override
@@ -72,9 +60,7 @@ public class Splashscreen extends AppCompatActivity {
 //---------------Submit Button init----------------
         Button submitBtn = (Button) findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(view -> {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt("country", currentCountrySelected).apply();
-
+            splashPresenter.currentCountryChanged(currentCountrySelected);
             startMainActivity();
         });
     }
