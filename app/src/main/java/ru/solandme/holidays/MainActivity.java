@@ -29,16 +29,14 @@ public class MainActivity extends AppCompatActivity {
             if (savedInstanceState != null) {
                 return;
             }
-            // Let's first dynamically add a fragment into a frame container
+            // dynamically add a fragment into a frame container
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.containerA, new HolidaysFragment(), "holidays")
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .commit();
         }
     }
-
-
 
 
     @Override

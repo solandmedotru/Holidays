@@ -9,7 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import ru.solandme.holidays.adapters.MyAdapter;
+import ru.solandme.holidays.adapters.HolidaysRVAdapter;
+import ru.solandme.holidays.data.ApiRepository;
 
 public class PageFragment extends Fragment {
 
@@ -17,7 +18,7 @@ public class PageFragment extends Fragment {
 
     int page;
 
-    MyAdapter adapter;
+    HolidaysRVAdapter adapter;
 
     public PageFragment() {
         // Required empty public constructor
@@ -44,7 +45,7 @@ public class PageFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_page, container, false);
         RecyclerView holidayRV = (RecyclerView) rootView.findViewById(R.id.holidayRecyclerView);
 
-        adapter = new MyAdapter(page);
+        adapter = new HolidaysRVAdapter(ApiRepository.getHolidaysByPage(page));
         holidayRV.setAdapter(adapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

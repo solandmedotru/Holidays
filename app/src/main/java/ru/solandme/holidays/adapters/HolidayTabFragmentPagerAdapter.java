@@ -8,11 +8,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import ru.solandme.holidays.PageFragment;
 import ru.solandme.holidays.R;
 
-public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
+public class HolidayTabFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private String[] tabTitles;
 
-    public MyFragmentPagerAdapter(FragmentManager fm, Context context) {
+    public HolidayTabFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         tabTitles = context.getResources().getStringArray(R.array.holiday_tabs_name);
     }

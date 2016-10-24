@@ -7,6 +7,7 @@ public class SplashModel implements MvpSplash.ProvidedModelOps {
 
     private MvpSplash.RequiredPresenterOps mPresenter;
     private SharedPreferences sharedPreferences;
+    private int[] flags = {R.mipmap.ic_russia, R.mipmap.ic_ukraine, R.mipmap.ic_usa};
 
     public SplashModel(MvpSplash.RequiredPresenterOps presenter) {
         this.mPresenter = presenter;
@@ -20,7 +21,17 @@ public class SplashModel implements MvpSplash.ProvidedModelOps {
 
     @Override
     public int getCurrentCountry() {
-        return sharedPreferences.getInt("country", 0);
+        return sharedPreferences.getInt("currentCountry", 0);
+    }
+
+    @Override
+    public int[] getFlagsList() {
+        return flags;
+    }
+
+    @Override
+    public void setCurrentCountry(int currentCountrySelected) {
+        sharedPreferences.edit().putInt("currentCountry", currentCountrySelected).apply();
     }
 
     @Override

@@ -32,9 +32,9 @@ public class Splashscreen extends AppCompatActivity implements View.OnClickListe
 //        if (!splashPresenter.isNeedShowSplash()) {
 //            startMainActivity();
 //        }
-
-        initViews();
         setupMVP();
+        initViews();
+
     }
 
     private void setupMVP() {
@@ -76,33 +76,28 @@ public class Splashscreen extends AppCompatActivity implements View.OnClickListe
 // -------------Spinner init----------------
         Spinner countriesSpinner = (Spinner) findViewById(R.id.countrySpinner);
 
-//        CustomSpinnerAdapter spinnerAdapter = new CustomSpinnerAdapter(
-//                getApplicationContext(),
-//                splashPresenter.getFlagsList(),
-//                getResources().getStringArray(R.array.countries));
-//
-//        countriesSpinner.setAdapter(spinnerAdapter);
-//        countriesSpinner.setSelection(splashPresenter.getCurrentCountrySelected());
-//        countriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                currentCountrySelected = position;
-//                splashPresenter.currentCountryChanged(position);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//            }
-//        });
+        CustomSpinnerAdapter spinnerAdapter = new CustomSpinnerAdapter(
+                getApplicationContext(),
+                mPresenter.getFlagsList(),
+                getResources().getStringArray(R.array.countries));
+
+        countriesSpinner.setAdapter(spinnerAdapter);
+        countriesSpinner.setSelection(mPresenter.getCurrentCountrySelected());
+        countriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                currentCountrySelected = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
 //---------------Submit Button init----------------
         Button submitBtn = (Button) findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(this);
-//        submitBtn.setOnClickListener(view -> {
-//            splashPresenter.currentCountryChanged(currentCountrySelected);
-//            startMainActivity();
-//        });
     }
 
 

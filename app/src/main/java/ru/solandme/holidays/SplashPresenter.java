@@ -7,7 +7,6 @@ import java.lang.ref.WeakReference;
 public class SplashPresenter implements MvpSplash.ProvidedPresenterOps, MvpSplash.RequiredPresenterOps {
 
     private WeakReference<MvpSplash.RequiredViewOps> mView;
-    // Model reference
     private MvpSplash.ProvidedModelOps mModel;
 
 
@@ -55,6 +54,7 @@ public class SplashPresenter implements MvpSplash.ProvidedPresenterOps, MvpSplas
     public void clickToSubmitBtn(int currentCountrySelected) {
 
         getView().startMainActivity(currentCountrySelected);
+        mModel.setCurrentCountry(currentCountrySelected);
 
     }
 
@@ -91,6 +91,16 @@ public class SplashPresenter implements MvpSplash.ProvidedPresenterOps, MvpSplas
     @Override
     public void setView(MvpSplash.RequiredViewOps view) {
         mView = new WeakReference<>(view);
+    }
+
+    @Override
+    public int[] getFlagsList() {
+        return mModel.getFlagsList();
+    }
+
+    @Override
+    public int getCurrentCountrySelected() {
+        return mModel.getCurrentCountry();
     }
 
     public void setModel(MvpSplash.ProvidedModelOps model) {

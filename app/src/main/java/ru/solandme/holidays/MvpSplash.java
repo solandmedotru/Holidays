@@ -20,6 +20,10 @@ public interface MvpSplash {
         void onDestroy(boolean isChangingConfiguration);
         void clickToSubmitBtn(int currentCountrySelected);
         void setView(RequiredViewOps view);
+
+        int[] getFlagsList();
+
+        int getCurrentCountrySelected();
     }
 
     /**
@@ -41,5 +45,8 @@ public interface MvpSplash {
         boolean loadCountryList();
         int getCurrentCountry();
 
+        int[] getFlagsList();
+
+        void setCurrentCountry(int currentCountrySelected);
     }
 }

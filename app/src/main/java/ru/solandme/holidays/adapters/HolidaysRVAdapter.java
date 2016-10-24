@@ -17,18 +17,17 @@ import ru.solandme.holidays.HolidayDetailFragment;
 import ru.solandme.holidays.R;
 import ru.solandme.holidays.data.ApiRepository;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class HolidaysRVAdapter extends RecyclerView.Adapter<HolidaysRVAdapter.MyViewHolder> {
 
-    ArrayList<Holiday> holidays;
-    int currentTab;
+    private ArrayList<Holiday> holidays;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
         TextView holidayName;
         TextView holidayDescription;
 
-        public MyViewHolder(final View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
 
             cardView = (CardView) itemView.findViewById(R.id.card_view);
@@ -37,13 +36,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 
-    public MyAdapter(int page) {
-        holidays = ApiRepository.getHolidaysByPage(page);
-        currentTab = page;
+    public HolidaysRVAdapter(ArrayList<Holiday> holidays) {
+        this.holidays = holidays;
+//        holidays = ApiRepository.getHolidaysByPage(page);
+    }
+
+    public void add(int position, Holiday holiday) {
+        holidays.add(position, holiday);
+        notifyItemInserted(position);
+    }
+
+    public void remove(Holiday holiday) {
+        int position = holidays.indexOf(holiday);
+        holidays.remove(position);
+        notifyItemRemoved(position);
     }
 
     @Override
-    public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HolidaysRVAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_items, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(view);
@@ -51,7 +61,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final MyAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final HolidaysRVAdapter.MyViewHolder holder, final int position) {
 
         holder.holidayName.setText(holidays.get(position).getName());
         holder.holidayDescription.setText(holidays.get(position).getDescription());
@@ -61,8 +71,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
             HolidayDetailFragment holidayDetailFragment = new HolidayDetailFragment();
             Bundle bundle = new Bundle();
-            bundle.putString("holidayName", holidays.get(position).getName());
-            bundle.putInt("currentTab", currentTab);
+            bundle.getString("holidayName", holidays.get(position).getName());
             holidayDetailFragment.setArguments(bundle);
             if (activity.findViewById(R.id.containerB) != null){
                 activity.getSupportFragmentManager()
